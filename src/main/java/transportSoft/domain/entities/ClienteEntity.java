@@ -47,9 +47,6 @@ private static final long serialVersionUID = 1L;
 	@Column(nullable = false, length = 50)
 	private String ciudad;
 	
-	@Column(nullable = false, length = 50)
-	private String pais;
-	
 	@Column(nullable = false, length = 20)
 	private String correo;
 	
