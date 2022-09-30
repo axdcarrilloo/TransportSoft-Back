@@ -7,6 +7,7 @@ public class Route {
 	
 //	URLs de servicios a consumir
 	public static final String CLIENTE = "/Cliente";
+	public static final String PUERTO = "/Puerto";
 	
 //	Crud URLs
 	public static final String REGISTRAR = "/Registrar";
