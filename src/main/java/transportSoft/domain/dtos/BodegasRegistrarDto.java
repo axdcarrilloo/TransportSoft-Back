@@ -11,14 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BodegasRegistrarDto {
 	
-	private String tipoDocumento;
-	
-	private String documento;
-	
-	private String nombres;
-	
-	private String apellidos;
+	private String nombre;
 	
 	private String direccion;
+	
+	private String ciudad;
 
 }

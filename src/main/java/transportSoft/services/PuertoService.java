@@ -28,7 +28,7 @@ public class PuertoService {
 		Map<String, Object> map = new HashMap<>();
 		Integer validar = 0;
 		if(puerto.getNombre() == null) {
-			map.put("nombre", "Tipo Nombre");
+			map.put("nombre", "Nombre");
 			validar = 1;
 		}
 		if(puerto.getDireccion() == null) {
@@ -44,7 +44,7 @@ public class PuertoService {
 	}
 	
 	public Long eliminar(Long id) {
-		log.info("UsuarioService.class : eliminar() -> Eliminando usuario...!");
+		log.info("UsuarioService.class : eliminar() -> Eliminando puerto...!");
 		if(existenciaPorId(id)) {
 			puertoRepository.deleteById(id);
 			return id;

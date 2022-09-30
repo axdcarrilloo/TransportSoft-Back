@@ -32,7 +32,7 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "tipo_documento", nullable = false, length = 10)
 	private String tipoDocumento;
 	
-	@Column(name = "documento", nullable = false, length = 100, unique = true)
+	@Column(nullable = false, length = 100, unique = true)
 	private String documento;
 	
 	@Column(length = 100)
