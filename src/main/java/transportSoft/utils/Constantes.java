@@ -17,5 +17,9 @@ public class Constantes {
 	public static final String ESTADO_MODIFICACION_FALLIDA = "Modificacion Fallida";
 	
 	public static final String DUPLICIDAD_REGISTRO = "Ya se encuentra registrado";
+	
+//	Prefijos de las entregas
+	public static final String PREFIJO_ENTREGA_T = "ENT";
+	public static final String PREFIJO_ENTREGA_M = "ENM";
 
 }

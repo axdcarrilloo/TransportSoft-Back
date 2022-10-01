@@ -8,10 +8,10 @@ import transportSoft.domain.entities.EntregaTerrestreEntity;
 
 public class EntregaTerrestreMapper {
 	
-private static Logger log = LoggerFactory.getLogger(EntregaTerrestreMapper.class);
+	private static Logger log = LoggerFactory.getLogger(EntregaTerrestreMapper.class);
 	
 	public static EntregaTerrestreEntity convertirDtoToEntity(EntregaTerrestreRegistrarDto entrega) {
-		log.info("EntregaTerrestreMapper.class : convertirDtoToEntity() -> Convirtiendo de FlotaRegistrarDto a FlotaEntity...!");
+		log.info("EntregaTerrestreMapper.class : convertirDtoToEntity() -> Convirtiendo de EntregaTerrestreRegistrarDto a EntregaTerrestreEntity...!");
 		return new EntregaTerrestreEntity(0L, entrega.getProducto(), entrega.getCamion(), entrega.getBodegaEntrega(),
 				entrega.getCliente(), entrega.getNumeroGuia(), entrega.getPrecioEnvio(), entrega.getCantidad(), entrega.getFechaRegistro(),
 				entrega.getFechaEntrega());

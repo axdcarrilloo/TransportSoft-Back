@@ -18,7 +18,7 @@ import transportSoft.repositories.FlotaRepository;
 @Service
 public class FlotaService {
 	
-private static Logger log = LoggerFactory.getLogger(FlotaService.class);
+	private static Logger log = LoggerFactory.getLogger(FlotaService.class);
 	
 	@Autowired
 	private FlotaRepository flotaRepository;
