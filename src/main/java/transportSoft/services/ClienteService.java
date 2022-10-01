@@ -62,7 +62,7 @@ public class ClienteService {
 	}
 	
 	public Long eliminar(Long id) {
-		log.info("UsuarioService.class : eliminar() -> Eliminando usuario...!");
+		log.info("ClienteService.class : eliminar() -> Eliminando cliente...!");
 		if(existenciaPorId(id)) {
 			clienteRepository.deleteById(id);
 			return id;

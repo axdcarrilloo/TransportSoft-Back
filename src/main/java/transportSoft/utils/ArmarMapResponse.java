@@ -9,6 +9,75 @@ public class ArmarMapResponse {
 	
 	private static Logger log = LoggerFactory.getLogger(ArmarMapResponse.class);
 	
+	public static String armarRegistroFallidoEntregaTerrestre(Map<String, Object> map) {
+		log.info("ArmarMapResponse.class : armarRegistroFallidoEntregaTerrestre() -> Armando String en registro fallido");
+
+			String response = "Error en el registro, campos vacios (";
+			Integer maxCaracteres = response.length();
+			
+			if(map.get("producto") != null) {
+				response = response + map.get("producto");
+			}
+			if(map.get("camion") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("camion");
+				} else {
+					response = response +", "+ map.get("camion");
+				}
+			}
+			if(map.get("bodegaEntrega") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("bodegaEntrega");
+				} else {
+					response = response +", "+ map.get("bodegaEntrega");
+				}
+			}
+			if(map.get("cliente") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("cliente");
+				} else {
+					response = response +", "+ map.get("cliente");
+				}
+			}
+			if(map.get("numeroGuia") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("numeroGuia");
+				} else {
+					response = response +", "+ map.get("numeroGuia");
+				}
+			}
+			if(map.get("precioEnvio") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("precioEnvio");
+				} else {
+					response = response +", "+ map.get("precioEnvio");
+				}
+			}
+			if(map.get("cantidad") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("cantidad");
+				} else {
+					response = response +", "+ map.get("cantidad");
+				}
+			}
+			if(map.get("fechaRegistro") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("fechaRegistro");
+				} else {
+					response = response +", "+ map.get("fechaRegistro");
+				}
+			}
+			if(map.get("fechaEntrega") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("fechaEntrega");
+				} else {
+					response = response +", "+ map.get("fechaEntrega");
+				}
+			}
+			response = response + ")";
+			return response;
+	}
+	
 	public static String armarRegistroFallidoFlota(Map<String, Object> map) {
 		log.info("ArmarMapResponse.class : armarRegistroFallidoBodega() -> Armando String en registro fallido");
 
