@@ -15,24 +15,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import transportSoft.domain.dtos.ProductoRegistrarDto;
+import transportSoft.domain.dtos.CamionRegistrarDto;
 import transportSoft.domain.dtos.ResponseMainDto;
-import transportSoft.services.ProductoService;
+import transportSoft.services.CamionService;
 import transportSoft.utils.ArmarMapResponse;
 import transportSoft.utils.Constantes;
 import transportSoft.utils.Route;
 
 @RestController
-@RequestMapping(value = Route.BASE+Route.PRODUCTO, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.BASE+Route.CAMION, produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin(origins = "*")
-public class ProductoController {
+public class CamionController {
 	
 	@Autowired
-	private ProductoService productoSvc;
+	private CamionService camionSvc;
 	
 	@DeleteMapping(value = Route.ELIMINAR)
 	public ResponseEntity<ResponseMainDto> eliminar(@PathVariable String id) {
-		Long idResponse = productoSvc.eliminar(Long.parseLong(id));
+		Long idResponse = camionSvc.eliminar(Long.parseLong(id));
 		if(idResponse != null) {
 			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto
 					(Constantes.ESTADO_ELIMINACION_EXITOSA, idResponse), HttpStatus.OK);
@@ -45,18 +45,18 @@ public class ProductoController {
 	@GetMapping(value = Route.TODOS)
 	public ResponseEntity<ResponseMainDto> consultarTodos() {
 		return new ResponseEntity<ResponseMainDto>(new ResponseMainDto
-				(Constantes.ESTADO_CONSULTA_EXITOSA, productoSvc.consultarTodos()), HttpStatus.OK);
+				(Constantes.ESTADO_CONSULTA_EXITOSA, camionSvc.consultarTodos()), HttpStatus.OK);
 	}
 	
 	@PostMapping(value = Route.REGISTRAR)
-	public ResponseEntity<ResponseMainDto> registrar(@RequestBody ProductoRegistrarDto producto) {
-		Map<String, Object> map = productoSvc.registrar(producto);
+	public ResponseEntity<ResponseMainDto> registrar(@RequestBody CamionRegistrarDto camion) {
+		Map<String, Object> map = camionSvc.registrar(camion);
 		if(map.get("response") != null) {
 			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_EXITOSO, 
 					(Long)map.get("response")), HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_FALLIDO, 
-					ArmarMapResponse.armarRegistroFallidoProducto(map)), HttpStatus.BAD_REQUEST);
+					ArmarMapResponse.armarRegistroFallidoCamion(map)), HttpStatus.BAD_REQUEST);
 		}
 	}
 

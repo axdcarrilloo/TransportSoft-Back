@@ -9,6 +9,73 @@ public class ArmarMapResponse {
 	
 	private static Logger log = LoggerFactory.getLogger(ArmarMapResponse.class);
 	
+	public static String armarRegistroFallidoFlota(Map<String, Object> map) {
+		log.info("ArmarMapResponse.class : armarRegistroFallidoBodega() -> Armando String en registro fallido");
+
+			String response = "Error en el registro, campos vacios (";
+			Integer maxCaracteres = response.length();
+			
+			if(map.get("numero") != null) {
+				response = response + map.get("numero");
+			}
+			if(map.get("conductor") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("conductor");
+				} else {
+					response = response +", "+ map.get("conductor");
+				}
+			}
+			response = response + ")";
+			return response;
+	}
+	
+	public static String armarRegistroFallidoCamion(Map<String, Object> map) {
+		log.info("ArmarMapResponse.class : armarRegistroFallidoBodega() -> Armando String en registro fallido");
+
+			String response = "Error en el registro, campos vacios (";
+			Integer maxCaracteres = response.length();
+			
+			if(map.get("placa") != null) {
+				response = response + map.get("placa");
+			}
+			if(map.get("conductor") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("conductor");
+				} else {
+					response = response +", "+ map.get("conductor");
+				}
+			}
+			response = response + ")";
+			return response;
+	}
+	
+	public static String armarRegistroFallidoProducto(Map<String, Object> map) {
+		log.info("ArmarMapResponse.class : armarRegistroFallidoBodega() -> Armando String en registro fallido");
+
+			String response = "Error en el registro, campos vacios (";
+			Integer maxCaracteres = response.length();
+			
+			if(map.get("tipoProducto") != null) {
+				response = response + map.get("tipoProducto");
+			}
+			if(map.get("nombre") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("nombre");
+				} else {
+					response = response +", "+ map.get("nombre");
+				}
+			}
+			if(map.get("tipoTransporte") != null) {
+				if(response.length() == maxCaracteres) {
+					response = response + map.get("tipoTransporte");
+				} else {
+					response = response +", "+ map.get("tipoTransporte");
+				}
+			}
+			response = response + ")";
+			return response;
+	}
+	
 	public static String armarRegistroFallidoBodega(Map<String, Object> map) {
 		log.info("ArmarMapResponse.class : armarRegistroFallidoBodega() -> Armando String en registro fallido");
 
