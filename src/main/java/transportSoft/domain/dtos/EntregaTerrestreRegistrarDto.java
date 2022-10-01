@@ -25,6 +25,8 @@ public class EntregaTerrestreRegistrarDto {
 	
 	private ClienteEntity cliente;
 	
+	private String prefijo;
+	
 	private String numeroGuia;
 	
 	private Float precioEnvio;

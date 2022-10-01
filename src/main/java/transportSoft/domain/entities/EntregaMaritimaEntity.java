@@ -45,6 +45,9 @@ public class EntregaMaritimaEntity {
     @JoinColumn(name = "id_cliente", nullable = false, referencedColumnName = "id")
 	private ClienteEntity cliente;
 	
+	@Column(nullable = false, length = 3, unique = true)
+	private String prefijo;
+	
 	@Column(nullable = false, length = 30)
 	private String numeroGuia;
 	

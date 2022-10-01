@@ -17,9 +17,15 @@ public class Constantes {
 	public static final String ESTADO_MODIFICACION_FALLIDA = "Modificacion Fallida";
 	
 	public static final String DUPLICIDAD_REGISTRO = "Ya se encuentra registrado";
+	public static final String ERROR_CARACTERES_PREFIJO = "Error en los caracteres del prefijo";
 	
 //	Prefijos de las entregas
 	public static final String PREFIJO_ENTREGA_T = "ENT";
 	public static final String PREFIJO_ENTREGA_M = "ENM";
+	
+	public static final String DESCRIPCION_ENTREGA_T = "Guia para entregas terrestres";
+	public static final String DESCRIPCION_ENTREGA_M = "Guia para entregas maritimas";
+	
+	
 
 }

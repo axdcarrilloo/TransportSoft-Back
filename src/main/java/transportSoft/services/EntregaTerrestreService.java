@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import transportSoft.domain.dtos.EntregaTerrestreRegistrarDto;
+import transportSoft.domain.dtos.GuiaRegistrarDto;
 import transportSoft.domain.entities.EntregaTerrestreEntity;
+import transportSoft.domain.entities.GuiaEntity;
 import transportSoft.mappers.EntregaTerrestreMapper;
 import transportSoft.repositories.EntregaTerrestreRepository;
+import transportSoft.utils.Constantes;
 
 @Service
 public class EntregaTerrestreService {
@@ -22,6 +25,21 @@ public class EntregaTerrestreService {
 	
 	@Autowired
 	private EntregaTerrestreRepository entregaTerrestreRepository;
+	
+	@Autowired
+	private GuiaService guiaSvc;
+	
+	private Map<String, Object>  validarPrefijo(String prefijo) {
+		Map<String, Object> map = new HashMap<>();
+		Integer validar = 0;
+		Integer prefijoLength = prefijo.length();
+		if(prefijoLength != 3) {
+			validar = 1;
+			map.put("prefijoLength", Constantes.ERROR_CARACTERES_PREFIJO);
+		}
+		map.put("validacion", validar);
+		return map;
+	}
 	
 	private Map<String, Object> validarCamposVacios(EntregaTerrestreRegistrarDto entrega) {
 		log.info("EntregaTerrestreService.class : validarCamposVacios() -> Validando campos de registro...!");
@@ -54,6 +72,13 @@ public class EntregaTerrestreService {
 		} else if(entrega.getCliente().getId() == null) {
 			validar = 1;
 			map.put("cliente", "Cliente");
+		}
+		if(entrega.getPrefijo() == null) {
+			validar = 1;
+			map.put("prefijo", "Prefijo");
+		} else if(entrega.getCliente().getId() == null) {
+			validar = 1;
+			map.put("prefijo", "Prefijo");
 		}
 		if(entrega.getNumeroGuia() == null) {
 			map.put("numeroGuia", "Numero de Guia");
@@ -116,10 +141,23 @@ public class EntregaTerrestreService {
 	public Map<String, Object> registrar(EntregaTerrestreRegistrarDto entrega) {
 		log.info("EntregaTerrestreService.class : registrar() -> Registrando entrega...!");
 		Map<String, Object> map = validarCamposVacios(entrega);
+		Map<String, Object> mapPrefijo = validarPrefijo(entrega.getPrefijo().toUpperCase());
+		if((Integer)mapPrefijo.get("validacion") == 1 ) {
+			map.put("prefijoLength", mapPrefijo.get("prefijoLength"));
+			map.put("validacion", 1);
+			return map;
+		} else {
+			GuiaEntity guia = guiaSvc.consultarPorPrefijo(entrega.getPrefijo().toUpperCase());
+			if(guia == null) {
+				guiaSvc.registrar(new GuiaRegistrarDto(entrega.getPrefijo().toUpperCase(), null, 
+						Constantes.DESCRIPCION_ENTREGA_T));
+			}
+		}
 		if((Integer)map.get("validacion") == 1) {
 			return map;
 		} else {
 			map.clear();
+			entrega.setNumeroGuia(guiaSvc.asignarGuia(entrega.getPrefijo().toUpperCase()));
 			map.put("response", entregaTerrestreRepository.save(EntregaTerrestreMapper.convertirDtoToEntity(entrega)).getId());
 			return map;
 		}

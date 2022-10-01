@@ -25,6 +25,8 @@ public class EntregaMaritimaRegistrarDto {
 	
 	private ClienteEntity cliente;
 	
+	private String prefijo;
+	
 	private String numeroGuia;
 	
 	private Float precioEnvio;

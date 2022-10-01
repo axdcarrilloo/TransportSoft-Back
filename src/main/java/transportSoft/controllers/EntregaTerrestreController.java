@@ -51,6 +51,10 @@ public class EntregaTerrestreController {
 	@PostMapping(value = Route.REGISTRAR)
 	public ResponseEntity<ResponseMainDto> registrar(@RequestBody EntregaTerrestreRegistrarDto entrega) {
 		Map<String, Object> map = entregaTerrestreSvc.registrar(entrega);
+		if(map.get("prefijoLength") != null) {
+			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_FALLIDO, 
+					(String)map.get("prefijoLength")), HttpStatus.BAD_REQUEST);
+		}
 		if(map.get("response") != null) {
 			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_EXITOSO, 
 					(Long)map.get("response")), HttpStatus.CREATED);
