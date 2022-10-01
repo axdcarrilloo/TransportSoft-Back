@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import transportSoft.domain.dtos.EntregaMaritimaRegistrarDto;
+import transportSoft.domain.dtos.GuiaRegistrarDto;
 import transportSoft.domain.entities.EntregaMaritimaEntity;
+import transportSoft.domain.entities.GuiaEntity;
 import transportSoft.mappers.EntregaMaritimaMapper;
 import transportSoft.repositories.EntregaMaritimaRepository;
+import transportSoft.utils.Constantes;
 
 @Service
 public class EntregaMaritimaService {
@@ -22,6 +25,33 @@ public class EntregaMaritimaService {
 	
 	@Autowired
 	private EntregaMaritimaRepository entregaMaritimaRepository;
+	
+	@Autowired
+	private GuiaService guiaSvc;
+	
+	@Autowired
+	private ProductoService productoSvc;
+	
+	@Autowired
+	private CamionService camionSvc;
+	
+	@Autowired
+	private BodegaService bodegaSvc;
+	
+	@Autowired
+	private ClienteService clienteSvc;
+	
+	private Map<String, Object>  validarPrefijo(String prefijo) {
+		Map<String, Object> map = new HashMap<>();
+		Integer validar = 0;
+		Integer prefijoLength = prefijo.length();
+		if(prefijoLength != 3) {
+			validar = 1;
+			map.put("prefijoLength", Constantes.ERROR_CARACTERES_PREFIJO);
+		}
+		map.put("validacion", validar);
+		return map;
+	}
 	
 	private Map<String, Object> validarCamposVacios(EntregaMaritimaRegistrarDto entrega) {
 		log.info("EntregaMaritimaService.class : validarCamposVacios() -> Validando campos de registro...!");
@@ -116,10 +146,39 @@ public class EntregaMaritimaService {
 	public Map<String, Object> registrar(EntregaMaritimaRegistrarDto entrega) {
 		log.info("EntregaMaritimaService.class : registrar() -> Registrando entrega...!");
 		Map<String, Object> map = validarCamposVacios(entrega);
+		Map<String, Object> mapPrefijo = validarPrefijo(entrega.getPrefijo().toUpperCase());
+		if((Integer)mapPrefijo.get("validacion") == 1 ) {
+			map.put("prefijoLength", mapPrefijo.get("prefijoLength"));
+			map.put("validacion", 1);
+			return map;
+		} else {
+			GuiaEntity guia = guiaSvc.consultarPorPrefijo(entrega.getPrefijo().toUpperCase());
+			if(guia == null) {
+				guiaSvc.registrar(new GuiaRegistrarDto(Constantes.PREFIJO_ENTREGA_M.toUpperCase(), null, 
+						Constantes.DESCRIPCION_ENTREGA_T));
+			}
+		}
 		if((Integer)map.get("validacion") == 1) {
+			return map;
+		}
+		if(! productoSvc.existenciaPorId(entrega.getProducto().getId()) ) {
+			map.put("inexistencia", Constantes.INEXISTENCIA_PRODUCTO);
+			return map;
+		}
+		if(! camionSvc.existenciaPorId(entrega.getFlota().getId()) ) {
+			map.put("inexistencia", Constantes.INEXISTENCIA_FLOTA);
+			return map;
+		} 
+		if(! bodegaSvc.existenciaPorId(entrega.getPuertoEntrega().getId()) ) {
+			map.put("inexistencia", Constantes.INEXISTENCIA_PUERTO);
+			return map;
+		}
+		if(! clienteSvc.existenciaPorId(entrega.getCliente().getId()) ) {
+			map.put("inexistencia", Constantes.INEXISTENCIA_CLIENTE);
 			return map;
 		} else {
 			map.clear();
+			entrega.setNumeroGuia(guiaSvc.asignarGuia(Constantes.PREFIJO_ENTREGA_M.toUpperCase()));
 			map.put("response", entregaMaritimaRepository.save(EntregaMaritimaMapper.convertirDtoToEntity(entrega)).getId());
 			return map;
 		}

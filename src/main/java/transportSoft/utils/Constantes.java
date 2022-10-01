@@ -18,6 +18,12 @@ public class Constantes {
 	
 	public static final String DUPLICIDAD_REGISTRO = "Ya se encuentra registrado";
 	public static final String ERROR_CARACTERES_PREFIJO = "Error en los caracteres del prefijo";
+	public static final String INEXISTENCIA_PRODUCTO = "No se encontro el producto";
+	public static final String INEXISTENCIA_CAMION = "No se encontro el camion";
+	public static final String INEXISTENCIA_FLOTA = "No se encontro la flota";
+	public static final String INEXISTENCIA_BODEGA = "No se encontro la bodega";
+	public static final String INEXISTENCIA_PUERTO = "No se encontro el puerto";
+	public static final String INEXISTENCIA_CLIENTE = "No se encontro el cliente";
 	
 //	Prefijos de las entregas
 	public static final String PREFIJO_ENTREGA_T = "ENT";

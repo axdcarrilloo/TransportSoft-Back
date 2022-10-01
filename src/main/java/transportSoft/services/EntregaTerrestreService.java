@@ -29,6 +29,18 @@ public class EntregaTerrestreService {
 	@Autowired
 	private GuiaService guiaSvc;
 	
+	@Autowired
+	private ProductoService productoSvc;
+	
+	@Autowired
+	private CamionService camionSvc;
+	
+	@Autowired
+	private BodegaService bodegaSvc;
+	
+	@Autowired
+	private ClienteService clienteSvc;
+	
 	private Map<String, Object>  validarPrefijo(String prefijo) {
 		Map<String, Object> map = new HashMap<>();
 		Integer validar = 0;
@@ -149,15 +161,31 @@ public class EntregaTerrestreService {
 		} else {
 			GuiaEntity guia = guiaSvc.consultarPorPrefijo(entrega.getPrefijo().toUpperCase());
 			if(guia == null) {
-				guiaSvc.registrar(new GuiaRegistrarDto(entrega.getPrefijo().toUpperCase(), null, 
+				guiaSvc.registrar(new GuiaRegistrarDto(Constantes.PREFIJO_ENTREGA_T, null, 
 						Constantes.DESCRIPCION_ENTREGA_T));
 			}
 		}
 		if((Integer)map.get("validacion") == 1) {
 			return map;
+		}
+		if(! productoSvc.existenciaPorId(entrega.getProducto().getId()) ) {
+			map.put("inexistencia", Constantes.INEXISTENCIA_PRODUCTO);
+			return map;
+		}
+		if(! camionSvc.existenciaPorId(entrega.getCamion().getId()) ) {
+			map.put("inexistencia", Constantes.INEXISTENCIA_CAMION);
+			return map;
+		} 
+		if(! bodegaSvc.existenciaPorId(entrega.getBodegaEntrega().getId()) ) {
+			map.put("inexistencia", Constantes.INEXISTENCIA_BODEGA);
+			return map;
+		}
+		if(! clienteSvc.existenciaPorId(entrega.getCliente().getId()) ) {
+			map.put("inexistencia", Constantes.INEXISTENCIA_CLIENTE);
+			return map;
 		} else {
 			map.clear();
-			entrega.setNumeroGuia(guiaSvc.asignarGuia(entrega.getPrefijo().toUpperCase()));
+			entrega.setNumeroGuia(guiaSvc.asignarGuia(Constantes.PREFIJO_ENTREGA_T));
 			map.put("response", entregaTerrestreRepository.save(EntregaTerrestreMapper.convertirDtoToEntity(entrega)).getId());
 			return map;
 		}

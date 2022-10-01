@@ -55,6 +55,10 @@ public class EntregaTerrestreController {
 			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_FALLIDO, 
 					(String)map.get("prefijoLength")), HttpStatus.BAD_REQUEST);
 		}
+		if(map.get("inexistencia") != null) {
+			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_FALLIDO, 
+					(String)map.get("inexistencia")), HttpStatus.BAD_REQUEST);
+		}
 		if(map.get("response") != null) {
 			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_EXITOSO, 
 					(Long)map.get("response")), HttpStatus.CREATED);

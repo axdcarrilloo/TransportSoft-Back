@@ -110,6 +110,7 @@ public class GuiaService {
 			return map;
 		} else {
 			map.clear();
+			guia.setPrefijo(guia.getPrefijo().toUpperCase());
 			guia.setConsecutivo(1);
 			map.put("response", guiaRepository.save(GuiaMapper.convertirDtoToEntity(guia)).getId());
 			return map;
