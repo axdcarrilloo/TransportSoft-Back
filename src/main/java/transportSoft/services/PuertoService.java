@@ -44,7 +44,7 @@ public class PuertoService {
 	}
 	
 	public Long eliminar(Long id) {
-		log.info("UsuarioService.class : eliminar() -> Eliminando puerto...!");
+		log.info("PuertoService.class : eliminar() -> Eliminando puerto...!");
 		if(existenciaPorId(id)) {
 			puertoRepository.deleteById(id);
 			return id;
