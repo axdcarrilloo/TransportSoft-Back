@@ -1,7 +1,5 @@
 package transportSoft.domain.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,27 +13,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "camiones")
+@Table(name = "flotas")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CamionEntity implements Serializable {
+public class FlotaEntity {
 	
-	private static final long serialVersionUID = 1L;
-
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 10)
 	private Long id;
 	
 	@Column(nullable = false, length = 30, unique = true)
-	private String placa;
+	private String numero;
 	
 	@Column(length = 150)
 	private String descripcion;
 	
 	@Column(nullable = false, length = 50)
-	private String conductor;
+	private String capitan;
 
 }

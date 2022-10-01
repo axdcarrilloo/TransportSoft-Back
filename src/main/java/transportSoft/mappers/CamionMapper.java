@@ -8,7 +8,7 @@ import transportSoft.domain.entities.CamionEntity;
 
 public class CamionMapper {
 	
-private static Logger log = LoggerFactory.getLogger(CamionMapper.class);
+	private static Logger log = LoggerFactory.getLogger(CamionMapper.class);
 	
 	public static CamionEntity convertirDtoToEntity(CamionRegistrarDto camion) {
 		log.info("CamionMapper.class : convertirDtoToEntity() -> Convirtiendo de CamionRegistrarDto a CamionEntity...!");

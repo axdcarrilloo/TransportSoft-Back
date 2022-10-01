@@ -18,11 +18,11 @@ public class ArmarMapResponse {
 			if(map.get("numero") != null) {
 				response = response + map.get("numero");
 			}
-			if(map.get("conductor") != null) {
+			if(map.get("capitan") != null) {
 				if(response.length() == maxCaracteres) {
-					response = response + map.get("conductor");
+					response = response + map.get("capitan");
 				} else {
-					response = response +", "+ map.get("conductor");
+					response = response +", "+ map.get("capitan");
 				}
 			}
 			response = response + ")";
