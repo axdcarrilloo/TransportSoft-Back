@@ -64,7 +64,7 @@ public class EntregaMaritimaController {
 					(Long)map.get("response")), HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_FALLIDO, 
-					ArmarMapResponse.armarRegistroFallidoEntregaTerrestre(map)), HttpStatus.BAD_REQUEST);
+					ArmarMapResponse.armarRegistroFallidoEntregaMaritima(map)), HttpStatus.BAD_REQUEST);
 		}
 	}
 

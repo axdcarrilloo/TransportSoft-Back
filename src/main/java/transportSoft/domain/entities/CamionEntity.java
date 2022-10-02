@@ -29,7 +29,7 @@ public class CamionEntity implements Serializable {
     @Column(nullable = false, length = 10)
 	private Long id;
 	
-	@Column(nullable = false, length = 30, unique = true)
+	@Column(nullable = false, length = 7, unique = true)
 	private String placa;
 	
 	@Column(length = 150)

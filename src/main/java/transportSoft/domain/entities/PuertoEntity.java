@@ -35,7 +35,7 @@ public class PuertoEntity implements Serializable {
 	@Column(nullable = false, length = 50)
 	private String direccion;
 	
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 100)
 	private String ciudad;
 
 }

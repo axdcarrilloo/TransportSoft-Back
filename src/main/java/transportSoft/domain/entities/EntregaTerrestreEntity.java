@@ -45,7 +45,7 @@ public class EntregaTerrestreEntity {
     @JoinColumn(name = "id_cliente", nullable = false, referencedColumnName = "id")
 	private ClienteEntity cliente;
 	
-	@Column(nullable = false, length = 4, unique = true)
+	@Column(nullable = false, length = 4)
 	private String prefijo;
 	
 	@Column(nullable = false, length = 10)
@@ -58,10 +58,10 @@ public class EntregaTerrestreEntity {
 	private Integer cantidad;
 	
 	@Column
-	private Double descuento;
+	private Float descuento;
 	
 	@Column
-	private Double total;
+	private Float total;
 	
 	@Column(nullable = false)
 	private LocalDateTime fechaRegistro;

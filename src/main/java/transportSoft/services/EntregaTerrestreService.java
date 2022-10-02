@@ -41,7 +41,26 @@ public class EntregaTerrestreService {
 	@Autowired
 	private ClienteService clienteSvc;
 	
+	private Float sacarTotal(Float precioEnvio, Float descuento) {
+		log.info("EntregaTerrestreService.class : sacarTotal() -> Sacando total...!");
+		if(descuento > 0F) {
+			return precioEnvio - descuento;
+		} else {
+			return 0F;
+		}
+	}
+	
+	private Float sacarDescuento(Integer cantidad, Float precioEnvio) {
+		log.info("EntregaTerrestreService.class : sacarDescuento() -> Sacando descuento...!");
+		if(cantidad > 10) {
+			return (precioEnvio * 5) / 100;
+		} else {
+			return 0F;
+		}
+	}
+	
 	private Map<String, Object>  validarPrefijo(String prefijo) {
+		log.info("EntregaTerrestreService.class : validarPrefijo() -> Validando caracteres del prefijo...!");
 		Map<String, Object> map = new HashMap<>();
 		Integer validar = 0;
 		Integer prefijoLength = prefijo.length();
@@ -177,7 +196,9 @@ public class EntregaTerrestreService {
 			return map;
 		} else {
 			map.clear();
-			entrega.setPrefijo(entrega.getPrefijo().toUpperCase());
+			entrega.setPrefijo(Constantes.PREFIJO_ENTREGA_T);
+			entrega.setDescuento( sacarDescuento( entrega.getCantidad(), entrega.getPrecioEnvio() ) );
+			entrega.setTotal( sacarTotal(entrega.getPrecioEnvio(), entrega.getDescuento()) );
 			entrega.setFechaRegistro(Constantes.obtenerFechaActual());
 			entrega.setNumeroGuia(guiaSvc.asignarGuia(Constantes.PREFIJO_ENTREGA_T));
 			map.put("response", entregaTerrestreRepository.save(EntregaTerrestreMapper.convertirDtoToEntity(entrega)).getId());

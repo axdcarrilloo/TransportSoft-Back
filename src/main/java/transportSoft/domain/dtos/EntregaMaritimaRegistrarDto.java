@@ -33,9 +33,9 @@ public class EntregaMaritimaRegistrarDto {
 	
 	private Integer cantidad;
 	
-	private Double descuento;
+	private Float descuento;
 	
-	private Double total;
+	private Float total;
 	
 	private LocalDateTime fechaRegistro;
 	

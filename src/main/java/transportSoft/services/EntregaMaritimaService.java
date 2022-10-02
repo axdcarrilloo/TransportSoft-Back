@@ -41,11 +41,30 @@ public class EntregaMaritimaService {
 	@Autowired
 	private ClienteService clienteSvc;
 	
+	private Float sacarTotal(Float precioEnvio, Float descuento) {
+		log.info("EntregaMaritimaService.class : sacarTotal() -> Sacando total...!");
+		if(descuento > 0F) {
+			return precioEnvio - descuento;
+		} else {
+			return 0F;
+		}
+	}
+	
+	private Float sacarDescuento(Integer cantidad, Float precioEnvio) {
+		log.info("EntregaMaritimaService.class : sacarDescuento() -> Sacando descuento...!");
+		if(cantidad > 10) {
+			return (precioEnvio * 3) / 100;
+		} else {
+			return 0F;
+		}
+	}
+	
 	private Map<String, Object>  validarPrefijo(String prefijo) {
+		log.info("EntregaMaritimaService.class : validarPrefijo() -> Validando caracteres del prefijo...!");
 		Map<String, Object> map = new HashMap<>();
 		Integer validar = 0;
 		Integer prefijoLength = prefijo.length();
-		if(prefijoLength != 3) {
+		if(prefijoLength != 4) {
 			validar = 1;
 			map.put("prefijoLength", Constantes.ERROR_CARACTERES_PREFIJO);
 		}
@@ -170,6 +189,9 @@ public class EntregaMaritimaService {
 			return map;
 		} else {
 			map.clear();
+			entrega.setPrefijo(Constantes.PREFIJO_ENTREGA_M.toUpperCase());
+			entrega.setDescuento( sacarDescuento( entrega.getCantidad(), entrega.getPrecioEnvio() ) );
+			entrega.setTotal( sacarTotal(entrega.getPrecioEnvio(), entrega.getDescuento()) );
 			entrega.setFechaRegistro(Constantes.obtenerFechaActual());
 			entrega.setNumeroGuia(guiaSvc.asignarGuia(Constantes.PREFIJO_ENTREGA_M.toUpperCase()));
 			map.put("response", entregaMaritimaRepository.save(EntregaMaritimaMapper.convertirDtoToEntity(entrega)).getId());
