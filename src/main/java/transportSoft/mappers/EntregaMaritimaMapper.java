@@ -13,8 +13,8 @@ private static Logger log = LoggerFactory.getLogger(EntregaMaritimaMapper.class)
 	public static EntregaMaritimaEntity convertirDtoToEntity(EntregaMaritimaRegistrarDto entrega) {
 		log.info("EntregaMaritimaMapper.class : convertirDtoToEntity() -> Convirtiendo de EntregaMaritimaRegistrarDto a EntregaMaritimaEntity...!");
 		return new EntregaMaritimaEntity(0L, entrega.getProducto(), entrega.getFlota(), entrega.getPuertoEntrega(),
-				entrega.getCliente(), entrega.getPrefijo(), entrega.getNumeroGuia(), entrega.getPrecioEnvio(), entrega.getCantidad(), entrega.getFechaRegistro(),
-				entrega.getFechaEntrega());
+				entrega.getCliente(), entrega.getPrefijo(), entrega.getNumeroGuia(), entrega.getPrecioEnvio(), entrega.getCantidad(), entrega.getDescuento(), 
+				entrega.getTotal(), entrega.getFechaRegistro(), entrega.getFechaEntrega());
 	}
 
 }

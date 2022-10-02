@@ -33,6 +33,10 @@ public class EntregaTerrestreRegistrarDto {
 	
 	private Integer cantidad;
 	
+	private Double descuento;
+	
+	private Double total;
+	
 	private LocalDateTime fechaRegistro;
 	
 	private LocalDateTime fechaEntrega;

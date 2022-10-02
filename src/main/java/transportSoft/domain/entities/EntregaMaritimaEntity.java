@@ -57,6 +57,12 @@ public class EntregaMaritimaEntity {
 	@Column(nullable = false, length = 30, unique = true)
 	private Integer cantidad;
 	
+	@Column
+	private Double descuento;
+	
+	@Column
+	private Double total;
+	
 	@Column(nullable = false)
 	private LocalDateTime fechaRegistro;
 	
