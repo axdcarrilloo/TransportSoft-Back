@@ -45,7 +45,7 @@ public class EntregaTerrestreService {
 		Map<String, Object> map = new HashMap<>();
 		Integer validar = 0;
 		Integer prefijoLength = prefijo.length();
-		if(prefijoLength != 3) {
+		if(prefijoLength != 4) {
 			validar = 1;
 			map.put("prefijoLength", Constantes.ERROR_CARACTERES_PREFIJO);
 		}
@@ -92,20 +92,12 @@ public class EntregaTerrestreService {
 			validar = 1;
 			map.put("prefijo", "Prefijo");
 		}
-		if(entrega.getNumeroGuia() == null) {
-			map.put("numeroGuia", "Numero de Guia");
-			validar = 1;
-		}
 		if(entrega.getPrecioEnvio() == null) {
 			map.put("precioEnvio", "Precio de Envio");
 			validar = 1;
 		}
 		if(entrega.getCantidad() == null) {
 			map.put("cantidad", "Cantidad");
-			validar = 1;
-		}
-		if(entrega.getFechaRegistro() == null) {
-			map.put("fechaRegistro", "Fecha de Registro");
 			validar = 1;
 		}
 		if(entrega.getFechaEntrega() == null) {
@@ -159,7 +151,7 @@ public class EntregaTerrestreService {
 			map.put("validacion", 1);
 			return map;
 		} else {
-			GuiaEntity guia = guiaSvc.consultarPorPrefijo(entrega.getPrefijo().toUpperCase());
+			GuiaEntity guia = guiaSvc.consultarPorPrefijo(Constantes.PREFIJO_ENTREGA_T);
 			if(guia == null) {
 				guiaSvc.registrar(new GuiaRegistrarDto(Constantes.PREFIJO_ENTREGA_T, null, 
 						Constantes.DESCRIPCION_ENTREGA_T));
@@ -185,6 +177,8 @@ public class EntregaTerrestreService {
 			return map;
 		} else {
 			map.clear();
+			entrega.setPrefijo(entrega.getPrefijo().toUpperCase());
+			entrega.setFechaRegistro(Constantes.obtenerFechaActual());
 			entrega.setNumeroGuia(guiaSvc.asignarGuia(Constantes.PREFIJO_ENTREGA_T));
 			map.put("response", entregaTerrestreRepository.save(EntregaTerrestreMapper.convertirDtoToEntity(entrega)).getId());
 			return map;

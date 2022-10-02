@@ -25,10 +25,10 @@ public class GuiaEntity {
     @Column(nullable = false, length = 10)
 	private Long id;
 	
-	@Column(nullable = false, length = 3, unique = true)
+	@Column(nullable = false, length = 4, unique = true)
 	private String prefijo;
 	
-	@Column(nullable = false, length = 4)
+	@Column(nullable = false, length = 6)
 	private Integer consecutivo;
 	
 	@Column(length = 100)

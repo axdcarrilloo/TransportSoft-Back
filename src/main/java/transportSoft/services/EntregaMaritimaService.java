@@ -85,20 +85,12 @@ public class EntregaMaritimaService {
 			validar = 1;
 			map.put("cliente", "Cliente");
 		}
-		if(entrega.getNumeroGuia() == null) {
-			map.put("numeroGuia", "Numero de Guia");
-			validar = 1;
-		}
 		if(entrega.getPrecioEnvio() == null) {
 			map.put("precioEnvio", "Precio de Envio");
 			validar = 1;
 		}
 		if(entrega.getCantidad() == null) {
 			map.put("cantidad", "Cantidad");
-			validar = 1;
-		}
-		if(entrega.getFechaRegistro() == null) {
-			map.put("fechaRegistro", "Fecha de Registro");
 			validar = 1;
 		}
 		if(entrega.getFechaEntrega() == null) {
@@ -152,9 +144,9 @@ public class EntregaMaritimaService {
 			map.put("validacion", 1);
 			return map;
 		} else {
-			GuiaEntity guia = guiaSvc.consultarPorPrefijo(entrega.getPrefijo().toUpperCase());
+			GuiaEntity guia = guiaSvc.consultarPorPrefijo(Constantes.PREFIJO_ENTREGA_M);
 			if(guia == null) {
-				guiaSvc.registrar(new GuiaRegistrarDto(Constantes.PREFIJO_ENTREGA_M.toUpperCase(), null, 
+				guiaSvc.registrar(new GuiaRegistrarDto(Constantes.PREFIJO_ENTREGA_M, null, 
 						Constantes.DESCRIPCION_ENTREGA_T));
 			}
 		}
@@ -178,6 +170,7 @@ public class EntregaMaritimaService {
 			return map;
 		} else {
 			map.clear();
+			entrega.setFechaRegistro(Constantes.obtenerFechaActual());
 			entrega.setNumeroGuia(guiaSvc.asignarGuia(Constantes.PREFIJO_ENTREGA_M.toUpperCase()));
 			map.put("response", entregaMaritimaRepository.save(EntregaMaritimaMapper.convertirDtoToEntity(entrega)).getId());
 			return map;

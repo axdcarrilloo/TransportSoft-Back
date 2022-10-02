@@ -1,5 +1,7 @@
 package transportSoft.utils;
 
+import java.time.LocalDateTime;
+
 public class Constantes {
 	
 	public static final Long SI_EXISTENCIA = -1L; // Validador de existencia de objeto
@@ -28,11 +30,15 @@ public class Constantes {
 	public static final String ERROR_CARACTERES_NUMERO = "Error en los caracteres del numero de flota";
 	
 //	Prefijos de las entregas
-	public static final String PREFIJO_ENTREGA_T = "ENT";
-	public static final String PREFIJO_ENTREGA_M = "ENM";
+	public static final String PREFIJO_ENTREGA_T = "PENT";
+	public static final String PREFIJO_ENTREGA_M = "PENM";
 	
 	public static final String DESCRIPCION_ENTREGA_T = "Guia para entregas terrestres";
 	public static final String DESCRIPCION_ENTREGA_M = "Guia para entregas maritimas";
+	
+	public static LocalDateTime obtenerFechaActual() {
+		return LocalDateTime.now();
+	} 
 	
 	public static Boolean validarLetra(String letras) {
 		 return letras.matches("[A-Z]+");

@@ -44,15 +44,21 @@ public class GuiaService {
 		Integer consecutivoCaracteres = consecutivoString.length();
 		switch (consecutivoCaracteres) {
 			case 1:
-				guia = guiaResponse.getPrefijo() + "000" + consecutivoString;
+				guia = guiaResponse.getPrefijo() + "00000" + consecutivoString;
 			break;
 			case 2:
-				guia = guiaResponse.getPrefijo() + "00" + consecutivoString;
+				guia = guiaResponse.getPrefijo() + "0000" + consecutivoString;
 			break;
 			case 3:
-				guia = guiaResponse.getPrefijo() + "0" + consecutivoString;
+				guia = guiaResponse.getPrefijo() + "000" + consecutivoString;
 			break;
 			case 4:
+				guia = guiaResponse.getPrefijo() + "00" + consecutivoString;
+			break;
+			case 5:
+				guia = guiaResponse.getPrefijo() + "0" + consecutivoString;
+			break;
+			case 6:
 				guia = guiaResponse.getPrefijo() + consecutivoString;
 			break;
 			default:

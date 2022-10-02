@@ -45,10 +45,10 @@ public class EntregaTerrestreEntity {
     @JoinColumn(name = "id_cliente", nullable = false, referencedColumnName = "id")
 	private ClienteEntity cliente;
 	
-	@Column(nullable = false, length = 3, unique = true)
+	@Column(nullable = false, length = 4, unique = true)
 	private String prefijo;
 	
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 10)
 	private String numeroGuia;
 	
 	@Column(nullable = false, length = 30)
