@@ -10,8 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CamionRegistrarDto {
-	
-	private Long id;
 
 	private String placa;
 	

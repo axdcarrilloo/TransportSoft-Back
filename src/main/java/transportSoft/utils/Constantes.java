@@ -24,6 +24,8 @@ public class Constantes {
 	public static final String INEXISTENCIA_BODEGA = "No se encontro la bodega";
 	public static final String INEXISTENCIA_PUERTO = "No se encontro el puerto";
 	public static final String INEXISTENCIA_CLIENTE = "No se encontro el cliente";
+	public static final String ERROR_CARACTERES_PLACA = "Error en los caracteres de la placa";
+	public static final String ERROR_CARACTERES_NUMERO = "Error en los caracteres del numero de flota";
 	
 //	Prefijos de las entregas
 	public static final String PREFIJO_ENTREGA_T = "ENT";
@@ -32,6 +34,12 @@ public class Constantes {
 	public static final String DESCRIPCION_ENTREGA_T = "Guia para entregas terrestres";
 	public static final String DESCRIPCION_ENTREGA_M = "Guia para entregas maritimas";
 	
+	public static Boolean validarLetra(String letras) {
+		 return letras.matches("[A-Z]+");
+	}
 	
+	public static Boolean validarNumero(String numero) {
+		 return numero.matches("[0-9]+");
+	}
 
 }

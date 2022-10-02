@@ -14,6 +14,7 @@ import transportSoft.domain.dtos.FlotaRegistrarDto;
 import transportSoft.domain.entities.FlotaEntity;
 import transportSoft.mappers.FlotaMapper;
 import transportSoft.repositories.FlotaRepository;
+import transportSoft.utils.Constantes;
 
 @Service
 public class FlotaService {
@@ -22,6 +23,43 @@ public class FlotaService {
 	
 	@Autowired
 	private FlotaRepository flotaRepository;
+	
+	private Map<String, Object>  validarNumeroFlota(String placa) {
+		Map<String, Object> map = new HashMap<>();
+		Integer validar = 0;
+		Integer placaLength = placa.length();
+		if(placaLength != 8) {
+			map.put("numeroLength", Constantes.ERROR_CARACTERES_NUMERO);
+			validar = 1;
+			map.put("validacion", validar);
+			return map;
+		}
+		String[] placaSplit = placa.split("-");
+		String letras = placaSplit[0];
+		String numeros = placa.substring(4, placa.length()-1);
+		String ultimoCaracter = placa.substring(placa.length()-1);
+		if(! Constantes.validarLetra(letras) ) {
+			map.put("numeroLength", Constantes.ERROR_CARACTERES_NUMERO);
+			validar = 1;
+			map.put("validacion", validar);
+			return map;
+		}
+		if(! Constantes.validarNumero(numeros) ) {
+			map.put("numeroLength", Constantes.ERROR_CARACTERES_NUMERO);
+			validar = 1;
+			map.put("validacion", validar);
+			return map;
+		} 
+		if(! Constantes.validarLetra(ultimoCaracter) ) {
+			map.put("numeroLength", Constantes.ERROR_CARACTERES_NUMERO);
+			validar = 1;
+			map.put("validacion", validar);
+			return map;
+		} else {
+			map.put("validacion", validar);
+			return map;
+		}
+	}
 	
 	private Map<String, Object> validarCamposVacios(FlotaRegistrarDto flota) {
 		log.info("FlotaService.class : validarCamposVacios() -> Validando campos de registro...!");
@@ -76,10 +114,16 @@ public class FlotaService {
 	public Map<String, Object> registrar(FlotaRegistrarDto flota) {
 		log.info("FlotaService.class : registrar() -> Registrando flota...!");
 		Map<String, Object> map = validarCamposVacios(flota);
+		Map<String, Object> mapNumeroFlota = validarNumeroFlota(flota.getNumero().toUpperCase());
 		if((Integer)map.get("validacion") == 1) {
+			return map;
+		}
+		if((Integer)mapNumeroFlota.get("validacion") == 1) {
+			map.put("numeroLength", mapNumeroFlota.get("numeroLength"));
 			return map;
 		} else {
 			map.clear();
+			flota.setNumero(flota.getNumero().toUpperCase());
 			map.put("response", flotaRepository.save(FlotaMapper.convertirDtoToEntity(flota)).getId());
 			return map;
 		}

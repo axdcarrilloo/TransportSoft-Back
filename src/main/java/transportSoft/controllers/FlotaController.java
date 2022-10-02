@@ -51,6 +51,10 @@ public class FlotaController {
 	@PostMapping(value = Route.REGISTRAR)
 	public ResponseEntity<ResponseMainDto> registrar(@RequestBody FlotaRegistrarDto flota) {
 		Map<String, Object> map = flotaSvc.registrar(flota);
+		if(map.get("numeroLength") != null) {
+			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_FALLIDO, 
+					(String)map.get("numeroLength")), HttpStatus.BAD_REQUEST);
+		}
 		if(map.get("response") != null) {
 			return new ResponseEntity<ResponseMainDto>(new ResponseMainDto(Constantes.ESTADO_REGISTRO_EXITOSO, 
 					(Long)map.get("response")), HttpStatus.CREATED);
