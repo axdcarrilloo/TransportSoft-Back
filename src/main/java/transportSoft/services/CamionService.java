@@ -28,15 +28,15 @@ public class CamionService {
 		Map<String, Object> map = new HashMap<>();
 		Integer validar = 0;
 		Integer placaLength = placa.length();
-		String[] placaSplit = placa.split("-");
-		String letras = placaSplit[0];
-		String numeros = placaSplit[1];
 		if(placaLength != 7) {
 			map.put("placaLength", Constantes.ERROR_CARACTERES_PLACA);
 			validar = 1;
 			map.put("validacion", validar);
 			return map;
 		}
+		String[] placaSplit = placa.split("-");
+		String letras = placaSplit[0];
+		String numeros = placaSplit[1];
 		if(! Constantes.validarLetra(letras) ) {
 			map.put("placaLength", Constantes.ERROR_CARACTERES_PLACA);
 			validar = 1;
