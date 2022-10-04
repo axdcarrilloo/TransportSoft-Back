@@ -107,10 +107,10 @@ public class CamionService {
 	public Map<String, Object> registrar(CamionRegistrarDto camion) {
 		log.info("CamionService.class : registrar() -> Registrando camion...!");
 		Map<String, Object> map = validarCamposVacios(camion);
-		Map<String, Object> mapPlaca = validarPlaca(camion.getPlaca().toUpperCase());
 		if((Integer)map.get("validacion") == 1) {
 			return map;
-		} 
+		}
+		Map<String, Object> mapPlaca = validarPlaca(camion.getPlaca().toUpperCase());
 		if((Integer)mapPlaca.get("validacion") == 1) {
 			map.put("placaLength", mapPlaca.get("placaLength"));
 			return map;

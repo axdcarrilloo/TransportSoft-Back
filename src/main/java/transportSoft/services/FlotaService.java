@@ -114,10 +114,10 @@ public class FlotaService {
 	public Map<String, Object> registrar(FlotaRegistrarDto flota) {
 		log.info("FlotaService.class : registrar() -> Registrando flota...!");
 		Map<String, Object> map = validarCamposVacios(flota);
-		Map<String, Object> mapNumeroFlota = validarNumeroFlota(flota.getNumero().toUpperCase());
 		if((Integer)map.get("validacion") == 1) {
 			return map;
 		}
+		Map<String, Object> mapNumeroFlota = validarNumeroFlota(flota.getNumero().toUpperCase());
 		if((Integer)mapNumeroFlota.get("validacion") == 1) {
 			map.put("numeroLength", mapNumeroFlota.get("numeroLength"));
 			return map;
